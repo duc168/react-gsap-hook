@@ -1,30 +1,39 @@
-# Custom React Uploader
+# React GSAP Hook
 
 ## Usage
 ##### _One line of code worths thousands lines of explanations._
 
 ```typescript
-import React, { useEffect, useState } from 'react'
-import Uploader, { convertUrlToUploadFileModel, UploadFileModel }  from 'react-gsap-hook'
-import styles from './styles.module.scss'
-const testUrl = `https://media.istockphoto.com/photos/desk-lamp-picture-id534400418?b=1&k=20&m=534400418&s=170667a&w=0&h=kWgxXtGPOGYwOg5WdvFebM_z3wAQBUG2wrTf24oBWTc=`
+import React, { useEffect, useRef, useState } from "react";
+import { useReactGsap } from "react-gsap-hook";
+import styles from "./styles.module.scss";
+const TEST_ANIMATION_CLASS_NAME = "test-animation";
 const Container: React.FC<any> = () => {
-    const [images, setImages] = useState<UploadFileModel[]>([])
-    useEffect(() => {
-        convertUrlToUploadFileModel(testUrl, 'testName.jpg').then((res) => {
-            setImages([res])
-        })
-    }, [])
-    return <div className={styles.container}>
-        <Uploader currentFiles={images} updateCurrentFiles={setImages} onError={(message, file) => {
-            console.log('error ', message, file)
-            }} multiple={true}
-            onlyShowFileInfo={false}        
-        />
-    </div>
-}
+  const [show, setShow] = useState(false)
+  const containerRef = useRef(null);
+  
+  useReactGsap(
+    show,
+    TEST_ANIMATION_CLASS_NAME,
+    { opacity: 0, y: 20, duration: 0.38 },
+    { opacity: 1, y: 0, duration: 0.38 },
+);
 
-export default Container
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setShow((prev) => !prev)
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, []);
+  return (
+    <div className={styles.container} ref={containerRef}>
+      <div className={`${styles.test} ${TEST_ANIMATION_CLASS_NAME}`}>test</div>
+    </div>
+  );
+};
+
+export default Container;
+
 ```
 
 ## Development
