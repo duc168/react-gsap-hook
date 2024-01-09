@@ -30,9 +30,9 @@ export default Container
 ## Development
 1. Git clone the project ``https://github.com/duc168/react-gsap-hook.git``
 2. Install lerna globally if you have not installed lerna yet, run ``yarn global add lerna``
-3. Run ``yarn`` to install the first packages
-4. ``yarn start`` to start developing
-5. ``yarn stop`` to stop developing
-6. ``yarn build`` to build a new version
+3. Run ``npm install`` to install the first packages
+4. ``npm start`` to start developing
+5. ``npm run stop`` to stop developing
+6. ``npm run build`` to build a new version
 
 ##### _Happy coding!_
